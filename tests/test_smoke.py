@@ -402,6 +402,27 @@ def test_deployed_app_imports_precomputed_artifacts_only() -> None:
     assert not any(name.startswith(forbidden) for name in imported)
 
 
+def test_homepage_kpi_dates_are_complete_and_compact() -> None:
+    pytest.importorskip("streamlit.testing.v1")
+    from streamlit.testing.v1 import AppTest
+
+    app = AppTest.from_file(PROJECT_ROOT / "streamlit_app.py", default_timeout=60)
+    app.query_params["view"] = "marketplace"
+    app.run()
+    assert not app.exception, app.exception
+    metrics = {element.label: str(element.value) for element in app.metric}
+    assert metrics["Fund products"] == "12"
+    assert metrics["OOS start"] == "01 Jan 2021"
+    assert metrics["OOS end"] == "31 Dec 2023"
+    assert metrics["Sector indices"] == "10"
+    assert metrics["Latest sentiment date"] == "29 Dec 2023"
+
+    source = (PROJECT_ROOT / "streamlit_app.py").read_text(encoding="utf-8")
+    assert '[class*="st-key-health_date_"]' in source
+    assert '[class*="st-key-health_count_"]' in source
+    assert "white-space: nowrap" in source
+
+
 @pytest.mark.parametrize(
     "view,expected",
     [

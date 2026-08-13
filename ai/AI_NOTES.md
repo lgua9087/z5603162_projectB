@@ -43,7 +43,7 @@ paper cited in the report. No other student's project was inspected or copied.
 
 ## Evidence and reproducibility
 
-The final automated state is 23/23 pipeline validations, 25 passing tests, clean
+The final automated state is 23/23 pipeline validations, 26 passing tests, clean
 Ruff checks on authored Python, and a passing hand-in script. Exact result tables
 are under `results/tables/`; app artifacts are under `results/data/`; figures are
 under `results/figures/`.

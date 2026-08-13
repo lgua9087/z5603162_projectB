@@ -20,6 +20,6 @@ the mechanical ones.
       student's own voice. **Student review remains required.**
 - [ ] Submit: the zip to Moodle, the public repo link, and the live Streamlit URL.
 
-Automated status: 23/23 pipeline validations, 25 passing tests, clean authored
+Automated status: 23/23 pipeline validations, 26 passing tests, clean authored
 Python lint, all 17 PDF pages visually inspected, `scripts/check_handin.py`
 passing, and the public deployment live. Moodle submission remains outstanding.

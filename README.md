@@ -89,7 +89,7 @@ drawdown improves by 0.46 percentage points.
 ## Verification status
 
 - 23 of 23 pipeline validations pass.
-- 25 automated tests pass, including all five Streamlit views and the final
+- 26 automated tests pass, including all five Streamlit views and the final
   look-through/default-selection checks.
 - All six required figures and the fusion comparison table are present.
 - The 17-page PDF has 10 narrative pages, followed by references and appendices;

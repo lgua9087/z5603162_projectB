@@ -68,6 +68,18 @@ def _configure_page() -> None:
         }
         [data-testid="stMetricLabel"] { margin-bottom: -.15rem; }
         [data-testid="stMetricValue"] { line-height: 1.05; }
+        [class*="st-key-health_date_"] [data-testid="stMetricValue"] {
+            font-size: clamp(1.1rem, 1.35vw, 1.45rem) !important;
+            letter-spacing: -0.025em;
+            line-height: 1.08;
+            white-space: nowrap;
+            overflow: visible;
+            text-overflow: clip;
+        }
+        [class*="st-key-health_count_"] [data-testid="stMetricValue"] {
+            font-size: clamp(1.35rem, 1.65vw, 1.8rem) !important;
+            line-height: 1.08;
+        }
         [data-testid="stSidebar"] { background: #EEF4F7; }
         .mr-hero {
             padding: .72rem 1rem; border-radius: 12px; line-height: 1.38;
@@ -115,11 +127,27 @@ def _data_health(artifacts) -> None:
     returns = artifacts.fund_returns
     sentiment = artifacts.sector_sentiment
     columns = st.columns(5)
-    columns[0].metric("Fund products", f"{returns['fund_id'].nunique():,}")
-    columns[1].metric("OOS start", f"{returns['date'].min():%d %b %Y}")
-    columns[2].metric("OOS end", f"{returns['date'].max():%d %b %Y}")
-    columns[3].metric("Sector indices", f"{sentiment['sector'].nunique():,}")
-    columns[4].metric("Latest sentiment date", f"{sentiment['date'].max():%d %b %Y}")
+    cards = (
+        (
+            "Fund products",
+            f"{returns['fund_id'].nunique():,}",
+            "health_count_funds",
+        ),
+        ("OOS start", f"{returns['date'].min():%d %b %Y}", "health_date_oos_start"),
+        ("OOS end", f"{returns['date'].max():%d %b %Y}", "health_date_oos_end"),
+        (
+            "Sector indices",
+            f"{sentiment['sector'].nunique():,}",
+            "health_count_sectors",
+        ),
+        (
+            "Latest sentiment date",
+            f"{sentiment['date'].max():%d %b %Y}",
+            "health_date_sentiment",
+        ),
+    )
+    for column, (label, value, key) in zip(columns, cards, strict=True):
+        column.container(key=key).metric(label, value)
 
 
 def _metric_card_row(row: pd.Series) -> None:

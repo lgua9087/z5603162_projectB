@@ -16,7 +16,7 @@ appendix pages.
    fact-sheet design.
 8. VADER design, sector index, and cross-sectional sentiment validation.
 9. Coverage-aware sentiment fusion before/after result and commercial meaning.
-10. Live app architecture, final look-through features, critical reflection,
+10. Live investor product, final look-through features, critical reflection,
     investor suitability, recommendations, and conclusion.
 
 ## Material excluded from the narrative limit

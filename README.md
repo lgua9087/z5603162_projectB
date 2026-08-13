@@ -6,9 +6,7 @@ systematic fund simulations, a coverage-aware sector sentiment analytic, and a
 decision-focused Streamlit interface.
 
 The build is complete and tested. The app is live on Streamlit Community Cloud
-and deployed from the public `lgua9087/marketready-funds` GitHub repository.
-The complete submission repository is public at
-<https://github.com/lgua9087/z5603162_projectB>.
+and deployed from the public `lgua9087/z5603162_projectB` GitHub repository.
 
 ## Product experience
 
@@ -104,11 +102,11 @@ market impact, and capacity constraints.
 
 ## Live deployment
 
-- Live app: <https://marketready-funds-ustakylve9nywmyokqp4q4.streamlit.app/>
-- Complete submission repository: <https://github.com/lgua9087/z5603162_projectB>
-- App deployment repository: <https://github.com/lgua9087/marketready-funds>
+- Live app: <https://z5603162projectb-zdwhgwh2jhcput7tn6w2ku.streamlit.app/>
+- Public GitHub repository: <https://github.com/lgua9087/z5603162_projectB>
 - Deployment branch: `main`
 - Entrypoint: `streamlit_app.py`
 
-The deployment bundle contains only the app, its runtime helpers, and required
-precomputed artifacts; it excludes raw data, secrets, and caches.
+The public repository contains the complete submission project. The app reads
+the required precomputed artifacts and the repository excludes raw data,
+secrets, and caches.

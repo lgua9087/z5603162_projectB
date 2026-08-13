@@ -43,7 +43,7 @@ paper cited in the report. No other student's project was inspected or copied.
 
 ## Evidence and reproducibility
 
-The final automated state is 23/23 pipeline validations, 22 passing tests, clean
+The final automated state is 23/23 pipeline validations, 25 passing tests, clean
 Ruff checks on authored Python, and a passing hand-in script. Exact result tables
 are under `results/tables/`; app artifacts are under `results/data/`; figures are
 under `results/figures/`.
@@ -57,5 +57,5 @@ under `results/figures/`.
 3. Open `report.docx` in Word, update cross-reference fields if prompted, and
    visually compare it with `report.pdf`.
 4. Run the app locally and inspect every view at desktop and narrow widths.
-5. Complete the public GitHub and Streamlit deployment later, then add both URLs
-   to the submission material.
+5. Confirm the final public GitHub and Streamlit URLs remain accessible before
+   submitting the report and repository.

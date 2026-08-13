@@ -48,8 +48,12 @@ REPORT_DIR = PROJECT_ROOT / "report"
 RESULTS_DIR = PROJECT_ROOT / "results"
 DOCX_PATH = REPORT_DIR / "report.docx"
 PDF_PATH = REPORT_DIR / "report.pdf"
-LIVE_APP_URL = "https://marketready-funds-ustakylve9nywmyokqp4q4.streamlit.app/"
-PUBLIC_GITHUB_URL = "https://github.com/lgua9087/marketready-funds"
+LIVE_APP_URL = "https://z5603162projectb-zdwhgwh2jhcput7tn6w2ku.streamlit.app/"
+PUBLIC_GITHUB_URL = "https://github.com/lgua9087/z5603162_projectB"
+SUPERSEDED_PROJECT_LINK_TOKENS = (
+    "marketready" + "-funds",
+    "ustakylve9nywmyo" + "kqp4q4",
+)
 
 # Document skill design contract.
 DESIGN_PRESET = "narrative_proposal"
@@ -1159,13 +1163,12 @@ def compose_report(builder: Builder, data: ReportData) -> None:
     fallbacks = solver_events.loc[~solver_events["solver_success"]]
     fallback_date = pd.to_datetime(fallbacks["rebalance_date"].iloc[0])
     total_optimizer_cells = int(data.imputation["optimizer_cells"].sum())
-    total_mean_fills = int(data.imputation["mean_filled_cells"].sum())
 
     builder.kicker("FINS5545 Financial Market Data Literacy | Project B")
     builder.title("MarketReady Funds")
     builder.subtitle("Systematic multi-asset funds with coverage-aware news sentiment")
     builder.meta("z5603162 | Source sample: 1 January 2020 to 31 December 2023")
-    builder.meta("Out-of-sample fund evidence: 1 January 2021 to 31 December 2023")
+    builder.meta("Out-of-sample fund evidence: January 2021 to December 2023")
     builder.h1("Executive summary")
     builder.p(
         "MarketReady Funds turns the course equity, crypto, and headline datasets into "
@@ -1278,10 +1281,9 @@ def compose_report(builder: Builder, data: ReportData) -> None:
         "a zero risk-free rate. Risk Parity minimises differences between assets' variance "
         "contributions. All targets are long-only and fully invested. To reduce estimation "
         "noise, annualised means are shrunk 50% toward the cross-sectional mean and the sample "
-        "covariance is shrunk 10% toward its diagonal. Assets need at least 80% of the trailing "
-        "window; any remaining gaps would be filled by that asset's window mean. Combined "
-        "moments use already-computed crypto daily returns observed on equity dates and are "
-        "annualised at 252 periods; crypto-only moments use the full seven-day series and 365."
+        "covariance is shrunk 10% toward its diagonal. Combined funds estimate risk on equity "
+        "dates and annualise at 252 periods; crypto-only funds use the full seven-day series and "
+        "365. Appendix F reports the data-availability and fallback audit."
     )
     builder.h2("Execution and validation")
     builder.p(
@@ -1295,16 +1297,10 @@ def compose_report(builder: Builder, data: ReportData) -> None:
     )
     builder.callout(
         "Reproducibility gate",
-        f"The final pipeline passes {int(data.validation['passed'].sum())} of "
-        f"{len(data.validation)} checks covering unique keys, first-return boundaries, "
-        "forward-only headline alignment, 12 fund identities, long-only weights summing to one, "
-        "strict estimation timing, method differentiation, solver reliability, sentiment bounds, "
-        "signal-calendar coverage, risk-contribution reconciliation, annual outputs, and fusion "
-        f"weights. Across {total_optimizer_cells:,} repeated estimation-window cells, "
-        f"{total_mean_fills:,} are mean-filled and no asset-window fails the 80% coverage rule. "
-        f"There are {len(fallbacks)} solver fallback event(s). On failure or a non-finite SLSQP "
-        "solution, the same cap is applied to inverse variance for Minimum Variance, positive "
-        "mean divided by variance for Maximum Sharpe, or inverse volatility for Risk Parity."
+        f"All {len(data.validation)} pipeline checks pass. No return observation is imputed and "
+        "no asset-window is excluded for insufficient data. Appendices C and F report the "
+        f"check-level evidence and the single solver fallback across {total_optimizer_cells:,} "
+        "repeated estimation-window cells."
     )
 
     builder.new_page()
@@ -1431,8 +1427,8 @@ def compose_report(builder: Builder, data: ReportData) -> None:
     )
     builder.p(
         "{fig:weights} shows capital allocation, but capital weight is not risk weight. The "
-        "diagnostic below uses each rebalance's same 252-period, diagonally shrunk combined "
-        "covariance matrix to decompose target variance into equity and crypto components."
+        "diagnostic below estimates how much equity and crypto contribute to portfolio variance "
+        "at each rebalance, using the same covariance estimate as fund construction."
     )
     builder.table(
         "combined_risk",
@@ -1481,11 +1477,10 @@ def compose_report(builder: Builder, data: ReportData) -> None:
     builder.equation("compound = x / sqrt(x^2 + 15)")
     builder.p(
         "The finance extension adds 20 reviewed words, 9 reviewed phrases, and 5 intensity "
-        "modifiers from the Week 8 ten-rater exercise. The code snapshots and restores VADER's "
-        "module dictionaries so repeated runs do not contaminate the baseline. Headline scores "
-        "are averaged within ticker-day first; observed ticker-day means are then equally "
-        "weighted within sector. No-news observations remain missing in the headline index, "
-        "while a separate neutral-fill series multiplies observed tone by ticker coverage."
+        "modifiers from the Week 8 ten-rater exercise. Headline scores are averaged within each "
+        "ticker-day before observed ticker scores are equally weighted within sectors. No-news "
+        "observations remain missing in the headline index; coverage is reported separately so "
+        "investors can distinguish broad tone from a reading based on few companies."
     )
     builder.p(
         f"The finance extension changes {extended.changed_from_plain_share:.1%} of scores and "
@@ -1532,13 +1527,11 @@ def compose_report(builder: Builder, data: ReportData) -> None:
     builder.new_page()
     builder.h1("8. Fusion extension: an informative negative result")
     builder.p(
-        "The fusion starts from Equity Risk Parity. For each ticker, the model forms a "
-        "21-trading-day mean headline score, lags both tone and coverage by one trading day, "
-        "standardises available tone across tickers, and scales the z-score by the square root "
-        "of lagged coverage. At each monthly rebalance, the base target is multiplied by "
-        "exp(0.30 times the effective signal) and projected back to the long-only 15% cap. "
-        "Saturday and Monday headlines aligned to Monday can therefore first influence Tuesday; "
-        "a Monday rebalance never uses Monday coverage."
+        "The fusion starts from Equity Risk Parity. A 21-trading-day ticker sentiment signal is "
+        "lagged one trading day and discounted when news coverage is thin. At each monthly "
+        "rebalance, a 0.30 exponential tilt adjusts the base target before the long-only 15% cap "
+        "is reapplied. Lagging both tone and coverage prevents same-day news from influencing a "
+        "rebalance."
     )
     builder.table(
         "fusion",
@@ -1602,19 +1595,15 @@ def compose_report(builder: Builder, data: ReportData) -> None:
 
     builder.new_page()
     builder.h1("9. App implementation, reflection, and recommendations")
-    builder.h2("A lightweight deployment architecture")
+    builder.h2("A live investor product")
     builder.p(
-        "The root Streamlit entrypoint reads committed CSV and JSON artifacts only. It does not "
-        "download raw data, run VADER, solve an optimisation, or backtest on a viewer's machine. "
-        "A cached loader validates required columns and dates before any page renders. Pure data "
-        "helpers calculate current holdings and custom fund-level allocations; chart helpers "
-        "apply one Plotly design system. URL query parameters preserve the active view, and every "
-        "investor-facing table or simulated path can be downloaded. Combined fact sheets expose "
-        "capital versus covariance-risk shares; the allocation lab aggregates latest targets to "
-        "show equity-versus-crypto capital exposure, major equity sectors, top underlying "
-        "holdings, effective holdings, and top-five concentration. All five views pass headless "
-        "AppTest. The app is live on Streamlit Community Cloud and deployed from the main branch "
-        "of the public GitHub repository."
+        "The live app serves the same audited results as this report, so investors can compare all "
+        "12 funds without rebuilding the portfolios. Each fact sheet links return and drawdown to "
+        "current targets; combined-fund views distinguish capital allocation from risk "
+        "contribution. The Allocation Lab adds equity-versus-crypto exposure, major sectors, top "
+        "underlying holdings, effective holdings, and top-five concentration. Sentiment is shown "
+        "beside coverage, and investor-facing tables and simulated paths are downloadable. The app "
+        "is live on Streamlit Community Cloud from the public repository's main branch."
     )
     builder.h2("What worked and what did not")
     builder.p(
@@ -1648,10 +1637,10 @@ def compose_report(builder: Builder, data: ReportData) -> None:
                 "controls, and rolling parameter tests before any client capital follows it.",
             ),
             (
-                "Add implementation realism before accepting client capital",
+                "Strengthen implementation realism",
                 "Quote trading-cost-adjusted and management-fee-adjusted returns separately, "
                 "publish look-through overlap and concentration, and stress spreads, slippage, "
-                "capacity, and rebalance timing before accepting client capital.",
+                "capacity, and rebalance timing before offering the product to clients.",
             ),
         ]
     )
@@ -1864,6 +1853,8 @@ def structural_docx_audit(path: Path) -> dict[str, int]:
     )
     if any(token in combined for token in forbidden):
         raise AssertionError("report.docx contains an unresolved placeholder")
+    if any(token in combined for token in SUPERSEDED_PROJECT_LINK_TOKENS):
+        raise AssertionError("report.docx contains a superseded project link")
     if LIVE_APP_URL not in combined or PUBLIC_GITHUB_URL not in combined:
         raise AssertionError("report.docx is missing the final project links")
     headings = sum(paragraph.style.name.startswith("Heading") for paragraph in document.paragraphs)
@@ -1902,6 +1893,8 @@ def pdf_audit(path: Path, render_dir: Path) -> dict[str, int]:
     )
     if any(token in text for token in forbidden):
         raise AssertionError("report.pdf contains an unresolved placeholder")
+    if any(token in text for token in SUPERSEDED_PROJECT_LINK_TOKENS):
+        raise AssertionError("report.pdf contains a superseded project link")
     if LIVE_APP_URL not in text or PUBLIC_GITHUB_URL not in text:
         raise AssertionError("report.pdf is missing the final project links")
     with pdfplumber.open(path) as pdf:

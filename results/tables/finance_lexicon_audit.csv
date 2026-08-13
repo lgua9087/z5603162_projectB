@@ -1,0 +1,30 @@
+term,term_type,valence,decision,reason,source
+buyback,word,1.8,approve,capital-return action generally read as favourable,Week 8 ten-rater mean plus recorded human review
+covenant breach,phrase,-3.1,approve,debt-agreement failure,Week 8 ten-rater mean plus recorded human review
+default,word,-3.8,approve,failure event,Week 8 ten-rater mean plus recorded human review
+delisting,word,-2.9,approve,failure event,Week 8 ten-rater mean plus recorded human review
+dilution,word,-2.0,approve,shareholder-value reduction,Week 8 ten-rater mean plus recorded human review
+dovish,word,1.0,approve,directional for risk assets,Week 8 ten-rater mean plus recorded human review
+downgrade,word,-2.8,approve,analyst action that states a judgement,Week 8 ten-rater mean plus recorded human review
+earnings beat,phrase,2.9,approve,result above expectations,Week 8 ten-rater mean plus recorded human review
+earnings miss,phrase,-2.9,approve,result below expectations,Week 8 ten-rater mean plus recorded human review
+going concern,phrase,-3.9,approve,audit warning about survival,Week 8 ten-rater mean plus recorded human review
+guidance cut,phrase,-2.9,approve,forward-looking downgrade by management,Week 8 ten-rater mean plus recorded human review
+guidance raise,phrase,2.9,approve,forward-looking upgrade by management,Week 8 ten-rater mean plus recorded human review
+hawkish,word,-1.0,approve,"directional for risk assets, although favourable for lenders",Week 8 ten-rater mean plus recorded human review
+headwind,word,-1.8,approve,figurative but consistently directional in filings,Week 8 ten-rater mean plus recorded human review
+impairment,word,-2.8,approve,write-down event,Week 8 ten-rater mean plus recorded human review
+insolvency,word,-3.9,approve,failure event,Week 8 ten-rater mean plus recorded human review
+litigation,word,-2.0,approve,adverse legal event,Week 8 ten-rater mean plus recorded human review
+material weakness,phrase,-3.0,approve,defined control failure in filings,Week 8 ten-rater mean plus recorded human review
+outperform,word,2.8,approve,relative performance judgement,Week 8 ten-rater mean plus recorded human review
+oversubscribed,word,2.0,approve,favourable demand outcome,Week 8 ten-rater mean plus recorded human review
+profit warning,phrase,-3.0,approve,pre-announced shortfall,Week 8 ten-rater mean plus recorded human review
+record revenue,phrase,3.0,approve,favourable operating result,Week 8 ten-rater mean plus recorded human review
+restatement,word,-2.8,approve,accounting failure,Week 8 ten-rater mean plus recorded human review
+restructuring,word,-1.9,approve,corrective event usually reported as adverse,Week 8 ten-rater mean plus recorded human review
+subpoena,word,-2.2,approve,adverse legal event,Week 8 ten-rater mean plus recorded human review
+tailwind,word,1.8,approve,figurative but consistently directional in filings,Week 8 ten-rater mean plus recorded human review
+underperform,word,-2.8,approve,relative performance judgement,Week 8 ten-rater mean plus recorded human review
+upgrade,word,2.8,approve,analyst action that states a judgement,Week 8 ten-rater mean plus recorded human review
+writedown,word,-2.8,approve,write-down event,Week 8 ten-rater mean plus recorded human review

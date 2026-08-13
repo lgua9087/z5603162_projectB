@@ -1,0 +1,8 @@
+line-length = 100
+target-version = "py313"
+
+# These two files are supplied course scaffolds and are retained byte-for-byte.
+exclude = ["src/data_access.py", "scripts/check_handin.py"]
+
+[lint]
+select = ["E", "F", "I", "RUF"]

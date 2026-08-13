@@ -1,0 +1,13 @@
+check,count,treatment
+Equity rows,50300,retained after 2023 cutoff
+Crypto rows,14610,10 rows after 2023 removed
+Unique news headlines,146836,ticker-date-title duplicates removed
+Equity duplicate keys,0,must equal zero
+Crypto duplicate keys,0,must equal zero
+News duplicate keys,0,must equal zero
+Nonpositive equity prices,0,must equal zero
+Nonpositive crypto prices,0,must equal zero
+Equity OHLC flags,0,must equal zero
+Crypto OHLC flags,0,must equal zero
+Rows removed after cutoff,10,mandatory sample cap
+News duplicates removed,2847,exact copied headlines only

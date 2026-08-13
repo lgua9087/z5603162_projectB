@@ -1,0 +1,24 @@
+check,passed
+Equity ticker-date keys are unique,True
+Crypto ticker-date keys are unique,True
+News ticker-date-title keys are unique,True
+First equity return is missing within ticker,True
+First crypto return is missing within ticker,True
+Headline mapping never moves backward,True
+Twelve fund products are present,True
+Three fund families are present,True
+Four methods per family are present,True
+Fund weights sum to one,True
+Fund weights are long-only,True
+Every estimation sample ends before its rebalance,True
+Portfolio methods produce distinct latest weights,True
+Solver success rate is at least 95%,True
+Ten sector sentiment indices are present,True
+Sentiment scores remain inside minus one to one,True
+Ticker signal dates cover the usable equity-return calendar,True
+Fusion weights sum to one,True
+Combined capital weights sum to one,True
+Combined covariance risk contributions sum to one,True
+Sentiment prediction tests cover one and five trading days,True
+Annual fund results cover every fund in 2021 through 2023,True
+Fusion robustness includes base case and two prespecified alternatives,True

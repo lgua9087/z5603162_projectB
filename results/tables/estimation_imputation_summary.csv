@@ -1,0 +1,4 @@
+family,rebalances,assets_total,minimum_eligible_assets,maximum_eligible_assets,asset_window_exclusions,optimizer_cells,mean_filled_cells,mean_fill_share,maximum_window_mean_fill_share
+Equity,36,50,50,50,0,453600,0,0.0,0.0
+Crypto,36,10,10,10,0,131400,0,0.0,0.0
+Combined,36,60,60,60,0,544320,0,0.0,0.0
